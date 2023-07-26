@@ -1,0 +1,33 @@
+.contLanding{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    background-image: url("../../images/world-map-2022.jpg") ;
+    background-size:contain;
+    
+}
+
+.questions{
+    height: 623px;
+    display: flex;
+    font-size:larger;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.questions h1{
+    margin: 15px;
+}
+
+.btn{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: url('../../images/TUOk.gif');
+    background-size:cover;
+    color: rgb(207,204,196);
+    font-style: oblique;
+    font-size: larger;
+    cursor: pointer;
+}

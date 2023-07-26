@@ -1,0 +1,9 @@
+.gnrCont{
+    border: 1px black solid;
+    width: 1534px;
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    background-image: url("../../images/MapWT2.png") ;
+    background-size:cover;
+}

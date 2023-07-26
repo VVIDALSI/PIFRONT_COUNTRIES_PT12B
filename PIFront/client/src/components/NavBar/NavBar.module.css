@@ -1,0 +1,53 @@
+.gnrlCont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    border: 1px black solid;
+    background-color: rgba(172, 200, 226, 0.795);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.countriesCont {
+    display: flex;
+    border: 1px black solid;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 60px;
+}
+
+.navigatorCont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 929px;
+    height: 60px;
+    border: 1px black solid;
+}
+
+.searchCont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px black solid;
+    width: 300px;
+    height: 60px;
+}
+
+.active{
+    /* -webkit-text-stroke: 1px blue; */
+
+    color: blue;
+    text-underline-offset: 4px;
+    text-decoration-color: red;
+  }
+  
+  .disable {
+    text-decoration: none;
+    color: inherit;
+  }

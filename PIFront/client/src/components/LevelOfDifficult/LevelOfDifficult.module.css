@@ -1,0 +1,18 @@
+.gnrlLOD{
+    width: 1000px;
+    height: 400px;
+    overflow-y: scroll;
+    margin: 20px;
+    box-shadow: 10px 5px 5px #888888;
+}
+
+.gnrlLOD img{
+    width: 100px;
+}
+
+.gnrlLOD p{
+    width: 900px;
+    margin-top: 10px;
+    text-align: justify;
+}
+

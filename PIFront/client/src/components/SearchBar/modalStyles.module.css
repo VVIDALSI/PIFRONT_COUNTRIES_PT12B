@@ -1,0 +1,30 @@
+.gnrMdl{
+    transform: translate(105%, 120%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: azure;
+    width: 500px;
+    height: 200px;
+    border: 2px red solid;
+    border-radius: 30px;
+    overflow:scroll;
+}
+
+.gnrMdl h2{
+    color: red;
+    margin: 10px;
+}
+
+.gnrMdl h3{
+    margin: 10px;
+}
+
+.gnrMdl button{
+    width: 80px;
+    height: 25px;
+    margin: 15px;
+    border-radius: 10px;
+    border: 2px red solid;
+}

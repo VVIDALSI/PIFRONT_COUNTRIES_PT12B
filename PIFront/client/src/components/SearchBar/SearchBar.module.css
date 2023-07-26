@@ -1,0 +1,17 @@
+.gnrlContSB{
+    display: flex;
+}
+
+.gnrlContSB button{
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 0 10px 10px 0;
+}
+
+.gnrlContSB input{
+    width: 150px;
+    height: 23px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 10px 0 0 10px;
+}

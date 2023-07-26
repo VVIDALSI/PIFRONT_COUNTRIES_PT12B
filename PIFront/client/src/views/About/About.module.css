@@ -1,0 +1,21 @@
+.contAbout{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    background-image: url("../../images/COUNTRIESABOUT.jpg") ;
+    background-size:contain;
+}
+
+.aout{
+    width: auto;
+    height: 355px;
+}
+
+.aout h1{
+    font-size: xx-large;
+    margin-top: 200px;
+}
+
+.aout p{
+    font-size:xx-large;
+}

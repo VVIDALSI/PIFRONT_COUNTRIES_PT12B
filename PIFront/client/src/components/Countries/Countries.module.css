@@ -1,0 +1,44 @@
+.CountriesGnrl{
+    width: 1533px;
+    height:415px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.pagCont{
+    width: 1534px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.btnprev{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px 0 0 25px;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.btnpot{
+    width: 150px;
+    height: 50px;
+    margin: 10px 0 10px 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    border: black 1px solid;
+}
+
+.btnnext{
+    width: 50px;
+    height: 50px;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    font-size: 1.4em;
+    font-weight: bold;
+}

@@ -1,0 +1,27 @@
+.gnrlCont{
+    border: 1px black solid;
+    height: 73px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.filSortCont {
+    margin: 0 20px 0 0;
+}
+
+.filSortCont select{
+    width: 200px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.filSortCont option{
+    width: 25px;
+    font-size: 1em;
+    font-weight: bold;
+}

@@ -1,0 +1,55 @@
+.detailCont{
+    width: 1534px;
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-image: url('../../images/cartgrap.jpg');
+    background-size:cover;
+}
+
+.nameidCont{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.coutryDetail{
+    display: flex;
+    width: 1534px;
+    align-items: center;
+}
+
+.infoCont{
+    width: 767px;
+    height: 473px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+}
+
+.flagCont{
+    width: 767px;
+    height: 473px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flagCont img{
+    height: 250px;
+}
+
+.flagCont button{
+    font-size: 1.4em;
+    font-weight: bold;
+    width: 200px;
+    height: 30px;
+    margin-top: 50px;
+    border-radius: 20px;
+    border-color: blue;
+    cursor: pointer;
+}
