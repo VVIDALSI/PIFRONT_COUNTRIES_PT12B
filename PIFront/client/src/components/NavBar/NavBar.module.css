@@ -40,8 +40,6 @@
 }
 
 .active{
-    /* -webkit-text-stroke: 1px blue; */
-
     color: blue;
     text-underline-offset: 4px;
     text-decoration-color: red;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import { useSelector } from "react-redux";
 import axios from "axios";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
@@ -7,11 +8,12 @@ import stlModal from "./CrateModal.module.css";
 import { Link } from "react-router-dom";
 import Modal from "react-modal";
 import LevelOfDifficult from "../../components/LevelOfDifficult/LevelOfDifficult";
-import {
-  validateTour,
-  validateDuration,
-  validateCountries,
-} from "../../vallidations/vallidations";
+import { continents, validCountries } from "../../vallidations/contries";
+// import {
+//   validateTour,
+//   validateDuration,
+//   validateCountries,
+// } from "../../vallidations/vallidations";
 
 const Create = () => {
   const [formData, setFormData] = useState({
@@ -24,52 +26,73 @@ const Create = () => {
 
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const [isModalOpen3, setIsModalOpen3] = useState(false);
+  const [selectedContinents, setSelectedContinents] = useState([]);
+  const [selectedCountries, setSelectedCountries] = useState([]);
 
   const refreshPage = () => {
     window.location.reload();
   };
 
-  const handleChange = (e) => {
-    const { name, value, dataset } = e.target;
-    if (dataset.index !== undefined) {
-      // Si el input tiene un atributo "data-index", significa que es un input de país
-      const index = parseInt(dataset.index, 10);
-      const updatedCountries = [...formData.countries];
-      updatedCountries[index] = value;
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        countries: updatedCountries,
-      }));
+  const handleContinentChange = (continent) => {
+    if (selectedContinents.includes(continent)) {
+      setSelectedContinents(selectedContinents.filter((c) => c !== continent));
     } else {
-      // Si no tiene "data-index", se actualiza normalmente
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
+      setSelectedContinents([...selectedContinents, continent]);
     }
   };
+
+  const handleCountryChange = (country) => {
+    if (selectedCountries.includes(country)) {
+      setSelectedCountries(selectedCountries.filter((c) => c !== country));
+    } else {
+      setSelectedCountries([...selectedCountries, country]);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const filteredCountries = validCountries.filter(
+    (country) =>
+      selectedContinents.length === 0 ||
+      selectedContinents.includes(country.continent)
+  );
+
+  console.log(formData);
+  console.log(selectedCountries);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const updatedFormData = {
+      ...formData,
+      countries: selectedCountries,
+    };
+
     // Realiza las validaciones antes de enviar el formulario
-    if (!validateTour(formData.tour)) {
-      alert("Tour Name is required.");
-      return;
-    }
+    // if (!validateTour(formData.tour)) {
+    //   alert("Tour Name is required.");
+    //   return;
+    // }
 
-    if (!validateDuration(formData.duration)) {
-      alert("Duration should be a positive integer.");
-      return;
-    }
+    // if (!validateDuration(formData.duration)) {
+    //   alert("Duration should be a positive integer.");
+    //   return;
+    // }
 
-    if (!validateCountries(formData.countries)) {
-      alert("All country fields are required and must be valid countries.");
-      return;
-    }
+    // if (!validateCountries(formData.countries)) {
+    //   alert("All country fields are required and must be valid countries.");
+    //   return;
+    // }
 
     axios
-      .post("http://localhost:3001/activities/", formData)
+      .post("http://localhost:3001/activities/", updatedFormData)
       .then(() => {
         setIsModalOpen2(true);
       })
@@ -147,56 +170,58 @@ const Create = () => {
           </select>
         </div>
 
-        <div className={stlCreate.divCountry}>
-          <label htmlFor="country1">Country 1:</label>
-          <input
-            type="text"
-            name="countries"
-            data-index="0"
-            placeholder="Enter a country to visit..."
-            value={formData.countries[0]}
-            onChange={handleChange}
-            className="country-input"
-          />
-        </div>
+        <div>
+          <label htmlFor="">Countries:</label>
+          <button type="button" onClick={() => setIsModalOpen3(true)}>
+            Add
+          </button>
+          <Modal
+            className={stlModal.mdlstl}
+            isOpen={isModalOpen3}
+            onRequestClose={() => setIsModalOpen3(false)}
+          >
+            <div className={stlModal.slcCountries}>
+              <h2>Select the contries of the Tour</h2>
+              <div className={stlModal.compSlecCountries}>
+                <div className={stlModal.gnrCont}>
+                  <div className={stlModal.divContinents}>
+                    <h2>Continents</h2>
+                    <div className={stlModal.divContinentsUnit}>
+                      {continents.map((continent) => (
+                        <div className={stlModal.boxContinents}>
+                          <input
+                            type="checkbox"
+                            checked={selectedContinents.includes(continent)}
+                            onChange={() => handleContinentChange(continent)}
+                          />
+                          <label key={continent}>{continent}</label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-        <div className={stlCreate.divCountry}>
-          <label htmlFor="country2">Country 2:</label>
-          <input
-            type="text"
-            name="countries"
-            data-index="1"
-            placeholder="Enter a country to visit..."
-            value={formData.countries[1]}
-            onChange={handleChange}
-            className="country-input"
-          />
-        </div>
-
-        <div className={stlCreate.divCountry}>
-          <label htmlFor="country3">Country 3:</label>
-          <input
-            type="text"
-            name="countries"
-            data-index="2"
-            placeholder="Enter a country to visit..."
-            value={formData.countries[2]}
-            onChange={handleChange}
-            className="country-input"
-          />
-        </div>
-
-        <div className={stlCreate.divCountry}>
-          <label htmlFor="country4">Country 4:</label>
-          <input
-            type="text"
-            name="countries"
-            data-index="3"
-            placeholder="Enter a country to visit..."
-            value={formData.countries[3]}
-            onChange={handleChange}
-            className="country-input"
-          />
+                  <div className={stlModal.divCountries}>
+                    <h2>Countries</h2>
+                    <div className={stlModal.countBox}>
+                      {filteredCountries.map((country, index) => (
+                        <div className={stlModal.miniBox} key={index}>
+                          <input
+                            type="checkbox"
+                            checked={selectedCountries.includes(country.name)}
+                            onChange={() => handleCountryChange(country.name)}
+                          />
+                          <label>{country.name}</label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="button" onClick={() => setIsModalOpen3(false)}>
+              Accept
+            </button>
+          </Modal>
         </div>
 
         <button type="submit">Submit</button>
@@ -213,6 +238,7 @@ const Create = () => {
           </div>
 
           <button
+            type="button"
             onClick={() => {
               setIsModalOpen2(false);
               refreshPage();
@@ -221,7 +247,6 @@ const Create = () => {
             Accept
           </button>
         </Modal>
-
       </form>
 
       <Footer />

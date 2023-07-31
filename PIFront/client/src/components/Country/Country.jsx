@@ -3,7 +3,7 @@ import stlCountry from "./Country.module.css";
 import { Link } from "react-router-dom";
 
 const Country = (props) => {
-  const {id, name, flag, region } = props;
+  const {id, name, flag, region, population } = props;
 
   return (
     <Link to={`/detail/${id}`}>
@@ -11,6 +11,7 @@ const Country = (props) => {
         <h2>{name}</h2>
         <img src={flag} alt="" />
         <h2>{region}</h2>
+        <h2>{population.toLocaleString()}</h2>
       </div>
     </Link>
   );

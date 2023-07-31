@@ -71,6 +71,7 @@ const Countries = () => {
               name={c.name}
               flag={c.flag}
               region={c.subregion}
+              population={c.population}
             />
           ))}
       </div>

@@ -14,6 +14,10 @@ import Detail from "./views/Detail/Detail";
 import Create from "./views/Create/Create";
 import About from "./views/About/About";
 
+//React
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function App() {
   return (
