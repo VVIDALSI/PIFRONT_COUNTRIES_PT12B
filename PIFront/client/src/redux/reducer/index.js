@@ -2,12 +2,16 @@ import {
   GET_COUNTRIES,
   SET_SELECTED_CONTINENT,
   SET_SORT_TYPE,
+  GET_ACTIVITIES,
+  SET_SELECTED_ACTIVITY,
 } from "../actions/index";
 
 const inicitalState = {
   countries: [],
   selectedContinent: "All",
   sortType: "ascendantAlf",
+  activities: [],
+  selectedActivity: "All",
 };
 
 const rootReducer = (state = inicitalState, action) => {
@@ -26,6 +30,12 @@ const rootReducer = (state = inicitalState, action) => {
         ...state,
         sortType: action.payload,
       };
+
+    case GET_ACTIVITIES:
+      return { ...state, activities: action.payload };
+
+    case SET_SELECTED_ACTIVITY:
+      return { ...state, selectedActivity: action.payload };
 
     default:
       return { ...state };

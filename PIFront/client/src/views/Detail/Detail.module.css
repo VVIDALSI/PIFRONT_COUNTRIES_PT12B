@@ -16,13 +16,14 @@
 }
 
 .coutryDetail{
+    
     display: flex;
     width: 1534px;
     align-items: center;
 }
 
 .infoCont{
-    width: 767px;
+    width: 450px;
     height: 473px;
     display: flex;
     align-items: center;
@@ -30,8 +31,9 @@
     text-align: justify;
 }
 
+
 .flagCont{
-    width: 767px;
+    width: 650px;
     height: 473px;
     display: flex;
     flex-direction: column;
@@ -52,4 +54,18 @@
     border-radius: 20px;
     border-color: blue;
     cursor: pointer;
+}
+
+.resCont{
+    width: 450px;
+    height: 473px;
+}
+
+.resCont select{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.resCont label{
+    font-size: 1.3em;
 }

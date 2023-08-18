@@ -1,21 +1,44 @@
-import React from "react";
-import { connect, useSelector  } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { connect, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import stlDetail from "./Detail.module.css";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import { getCountries } from "../../redux/actions/index";
 
-
 const Detail = (props) => {
   const { id } = useParams();
   const allCountries = useSelector((state) => state.countries);
+  const [activities, setActivities] = useState([]);
+  const [selectedActivity, setSelectedActivity] = useState(null);
+
+  useEffect(() => {
+    // Realizar llamada a la API para obtener actividades del país
+    fetch(`http://localhost:3001/activities/countries-activities/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setActivities(data.relatedActivities);
+      })
+      .catch((error) => {
+        console.error("Error fetching activities:", error);
+      });
+  }, [id]);
 
   const countryFound = allCountries.find((country) => country.id === id);
 
   if (!countryFound) {
     return <div>País no encontrado</div>;
   }
+
+  const handleSelectActivity = (event) => {
+    const selectedActivityId = parseInt(event.target.value, 10);
+    const activity = activities.find(
+      (activity) => activity.id === selectedActivityId
+    );
+    setSelectedActivity(activity);
+  };
+
+  console.log(activities);
 
   const { name, continent, capital, subregion, area, population, flag } =
     countryFound;
@@ -43,6 +66,31 @@ const Detail = (props) => {
 
           <div className={stlDetail.flagCont}>
             <img src={flag} alt="" />
+          </div>
+
+          <div className={stlDetail.resCont}>
+            <div>
+              <h2>Activities:</h2>
+              <select onChange={handleSelectActivity}>
+                <option value="">Seleccione una actividad</option>
+                {activities.map((activity) => (
+                  <option key={activity.id} value={activity.id}>
+                    {activity.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {selectedActivity && (
+              <div>
+                <h2>Summary of the selected activity:</h2>
+                <p><label htmlFor="Tour"><b>Tour:</b> {selectedActivity.name}</label></p>
+                <p><label htmlFor=""><b>Diffcult:</b> {selectedActivity.difficult}</label></p>
+                <p><label htmlFor=""><b>Duration:</b> {selectedActivity.duration} Hrs</label></p>
+                <p><label htmlFor=""><b>Season:</b> {selectedActivity.season}</label></p>
+                <p><label htmlFor=""><b>Countries:</b> {selectedActivity.countries.join(", ")}</label></p>
+  
+              </div>
+            )}
           </div>
         </div>
       </div>

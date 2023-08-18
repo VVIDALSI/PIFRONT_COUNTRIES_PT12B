@@ -7,6 +7,8 @@ import stlCountries from "../Countries/Countries.module.css";
 const Countries = () => {
   const allCountries = useSelector((state) => state.countries);
   const selectedContinent = useSelector((state) => state.selectedContinent);
+  const selectedActivity = useSelector((state) => state.selectedActivity);
+  const activities = useSelector((state) => state.activities);
   const selectedSortType = useSelector((state) => state.sortType); // Obtener el tipo de ordenamiento
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(0);
@@ -17,10 +19,26 @@ const Countries = () => {
 
   const countriesPerPage = 10;
 
-  // Filtrar los países según el continente seleccionado
-  const filteredCountries = selectedContinent === "All"
-    ? allCountries
-    : allCountries.filter(c => c.continent === selectedContinent);
+  const selectedActivityData = activities.find(
+    (activity) => activity.name === selectedActivity
+  );
+
+  const countriesOfActivity = selectedActivityData
+    ? selectedActivityData.countries
+    : [];
+
+  let filteredCountries = allCountries;
+
+  if (selectedActivityData !== undefined) {
+    const activityCountries = selectedActivityData.countries;
+    if (activityCountries.length > 0) {
+      filteredCountries = filteredCountries.filter((country) => activityCountries.includes(country.name));
+    }
+  }
+  
+  if (selectedContinent !== "All") {
+    filteredCountries = filteredCountries.filter((country) => country.continent === selectedContinent);
+  }
 
   // Realizar el ordenamiento de los países según el tipo seleccionado
   const sortedCountries = [...filteredCountries]; // Crear una copia para no modificar el estado original
@@ -76,11 +94,21 @@ const Countries = () => {
           ))}
       </div>
       <div>
-        <button className={stlCountries.btnprev} onClick={handlePrevious} disabled={currentPage === 0}>
+        <button
+          className={stlCountries.btnprev}
+          onClick={handlePrevious}
+          disabled={currentPage === 0}
+        >
           ←
         </button>
-        <button className={stlCountries.btnpot}>Page {currentPage + 1} of {totalPages}</button>
-        <button className={stlCountries.btnnext} onClick={handleNext} disabled={currentPage === totalPages - 1}>
+        <button className={stlCountries.btnpot}>
+          Page {currentPage + 1} of {totalPages}
+        </button>
+        <button
+          className={stlCountries.btnnext}
+          onClick={handleNext}
+          disabled={currentPage === totalPages - 1}
+        >
           →
         </button>
       </div>
