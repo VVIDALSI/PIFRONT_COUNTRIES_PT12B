@@ -38,8 +38,6 @@ const Detail = (props) => {
     setSelectedActivity(activity);
   };
 
-  console.log(activities);
-
   const { name, continent, capital, subregion, area, population, flag } =
     countryFound;
 
